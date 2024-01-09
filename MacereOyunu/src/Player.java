@@ -1,9 +1,11 @@
+import java.nio.file.Watchable;
 import java.util.Scanner;
 
 public class Player {
     private Scanner input = new Scanner(System.in);
     private int damage;
     private int health;
+    private int orjinalHealth;
     private int money;
     private String name;
     private String charName;
@@ -47,16 +49,17 @@ public class Player {
                 initPlayer(new Samurai());
         }
 
-        System.out.println("Karakter : " + this.charName +
+        /*System.out.println("Karakter : " + this.charName +
                 ", Hasar: " + this.getDamage() +
                 ", Sağlık: " + this.getHealth() +
                 ", Para: " + this.getMoney());
-
+*/
     }
 
     public void initPlayer(GameChar gameChar) {
         this.setDamage(gameChar.getDamage());
         this.setHealth(gameChar.getHealth());
+        this.setOrjinalHealth(gameChar.getHealth());
         this.setMoney(gameChar.getMoney());
         this.setCharName(gameChar.getName());
 
@@ -67,11 +70,14 @@ public class Player {
                         "  Silah: " + this.getInventory().getWeapon().getName() +
                         ", Zırh: " + this.getInventory().getArmor().getName() +
                         ", Blocklama: " + this.getInventory().getArmor().getBlock() +
-                        ", Hasar: " + this.getDamage() +
+                        ", Hasar: " + this.getTotalDamage() +
                         ", Sağlık: " + this.getHealth() +
                         ", Para: " + this.getMoney());
     }
 
+    public int getTotalDamage(){
+        return damage + this.getInventory().getWeapon().getDamage();
+    }
 
     public int getDamage() {
         return damage + this.getInventory().getWeapon().getDamage();
@@ -86,6 +92,9 @@ public class Player {
     }
 
     public void setHealth(int health) {
+        if (health<0){
+            health = 0;
+        }
         this.health = health;
     }
 
@@ -115,6 +124,14 @@ public class Player {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public int getOrjinalHealth() {
+        return orjinalHealth;
+    }
+
+    public void setOrjinalHealth(int orjinalHealth) {
+        this.orjinalHealth = orjinalHealth;
     }
 
     public void setCharName(String charName) {
