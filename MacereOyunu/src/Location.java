@@ -10,7 +10,10 @@ public abstract class Location {
         this.name = name;
     }
 
+
     public abstract boolean onLocation();
+
+
 
     public Player getPlayer() {
         return player;

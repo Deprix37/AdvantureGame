@@ -4,11 +4,11 @@ public class Weapon {
     private int damage;
     private int price;
 
-    public Weapon(String name, int id, int damage, int price) {
-        this.name = name;
+    public Weapon(String name,int id, int damage, int price) {
         this.id = id;
         this.damage = damage;
         this.price = price;
+        this.name = name;
     }
 
     public static Weapon[] weapons(){
@@ -16,16 +16,18 @@ public class Weapon {
         weaponList[0] = new Weapon("Tabanca",1,2,15);
         weaponList[1] = new Weapon("Kılıç",2,3,35);
         weaponList[2] = new Weapon("Tüfek",3,7,45);
-
         return weaponList;
     }
 
     public static Weapon getWeaponObjByID(int id){
-        for (Weapon w: Weapon.weapons()){
+
+        for (Weapon w : Weapon.weapons()) {
             if (w.getId() == id){
                 return w;
             }
+
         }
+
         return null;
     }
 
